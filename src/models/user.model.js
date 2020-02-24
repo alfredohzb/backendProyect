@@ -26,7 +26,7 @@ UserSchema.methods.comparePasswords = function(password) {
 UserSchema.pre("save", async function(next) {
   const user = this;
 
-  if (user.isModified("password")) {
+  if (!user.isModified("password")) {
     return next();
   }
   const salt = genSaltSync(10);
